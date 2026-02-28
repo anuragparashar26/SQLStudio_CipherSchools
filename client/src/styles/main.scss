@@ -1,0 +1,465 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+// base styles
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: $font-main;
+    background: $color-bg;
+    color: $color-text;
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+// global components
+
+.navbar {
+    height: 50px;
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    z-index: 100;
+
+    &__logo {
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+
+        span {
+            color: $color-primary;
+        }
+
+        &-img {
+            height: 24px;
+            width: auto;
+        }
+    }
+
+    &__tagline {
+        margin-left: auto;
+        color: $color-text-dim;
+        font-size: 0.85rem;
+        display: none;
+
+        @include respond-to(tablet) {
+            display: block;
+        }
+    }
+}
+
+//difficulty badges
+
+.diff {
+    font-size: 0.8rem;
+    font-weight: 500;
+
+    &--easy {
+        color: $color-easy;
+    }
+
+    &--medium {
+        color: $color-medium;
+    }
+
+    &--hard {
+        color: $color-hard;
+    }
+}
+
+// home page
+
+.problem-list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+
+    &__header {
+        margin-bottom: 1.5rem;
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            color: $color-text-secondary;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+    }
+}
+
+.problem-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        color: $color-text-dim;
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid $color-border;
+    }
+
+    td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba($color-border, 0.5);
+        font-size: 0.95rem;
+    }
+
+    tr {
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &:last-child td {
+            border-bottom: none;
+        }
+    }
+
+    tbody tr:hover {
+        background: $color-surface;
+    }
+
+    .col-title {
+        font-weight: 500;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    .col-table {
+        color: $color-text-dim;
+        font-family: $font-mono;
+        font-size: 0.8rem;
+    }
+}
+
+// assignment workspace
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    overflow: hidden;
+
+    @include respond-to(desktop) {
+        flex-direction: row;
+    }
+}
+
+// Left Panel: Assignment Details
+.desc-panel {
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
+    overflow-y: auto;
+    padding: 1.25rem;
+    flex: 0 0 auto;
+    max-height: 40vh;
+
+    @include respond-to(desktop) {
+        width: 40%;
+        max-height: none;
+        border-bottom: none;
+        border-right: 1px solid $color-border;
+    }
+
+    &__back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: $color-text-dim;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+            color: $color-text;
+        }
+    }
+
+    &__title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    &__text {
+        color: $color-text-secondary;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+    }
+}
+
+// Schema & Sample Data Code Blocks
+
+.schema-block {
+    background: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+
+    &__label {
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $color-text-dim;
+        margin-bottom: 0.4rem;
+    }
+
+    pre {
+        font-family: $font-mono;
+        font-size: 0.85rem;
+        color: $color-accent;
+        white-space: pre-wrap;
+        word-break: break-word;
+        line-height: 1.5;
+    }
+}
+
+// Right Panel: Editor & Result Area
+.editor-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.editor-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
+
+    .toolbar-label {
+        font-size: 0.8rem;
+        color: $color-text-dim;
+        margin-right: auto;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+}
+
+.editor-wrapper {
+    flex: 1;
+    min-height: 200px;
+    background: #1e1e1e;
+}
+
+// Output / Result Console
+.output-area {
+    border-top: 1px solid $color-border;
+    background: $color-surface;
+    max-height: 40%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: $color-text-dim;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        border-bottom: 1px solid $color-border;
+    }
+
+    &__content {
+        padding: 0.75rem;
+        flex: 1;
+    }
+}
+
+// UI ELEMENTS & UTILITIES
+
+// Buttons
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.85rem;
+    border: none;
+    border-radius: $radius;
+    font-family: $font-main;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease, opacity 0.15s ease;
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    &--run {
+        background: $color-accent;
+        color: #fff;
+
+        &:hover:not(:disabled) {
+            background: #34d468;
+        }
+    }
+
+    &--hint {
+        background: rgba($color-primary, 0.15);
+        color: $color-primary;
+
+        &:hover:not(:disabled) {
+            background: rgba($color-primary, 0.25);
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        color: $color-text-dim;
+
+        &:hover:not(:disabled) {
+            color: $color-text;
+        }
+    }
+
+    &--accent {
+        background: rgba($color-primary, 0.1);
+        color: $color-primary;
+
+        &:hover:not(:disabled) {
+            background: rgba($color-primary, 0.15);
+        }
+    }
+}
+
+// Results Table in Output
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+
+    th {
+        background: $color-surface-alt;
+        color: $color-text-dim;
+        font-weight: 500;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid $color-border;
+    }
+
+    td {
+        padding: 0.4rem 0.75rem;
+        border-bottom: 1px solid rgba($color-border, 0.4);
+        font-family: $font-mono;
+        font-size: 0.8rem;
+    }
+
+    tr:hover td {
+        background: rgba(#fff, 0.02);
+    }
+}
+
+.results-empty {
+    color: $color-text-dim;
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+}
+
+// Feedback Box Base (Hints & Errors)
+%feedback-box {
+    border-radius: $radius;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.error-msg {
+    @extend %feedback-box;
+    background: rgba($color-danger, 0.1);
+    border-left: 3px solid $color-danger;
+    color: $color-danger;
+    font-family: $font-mono;
+}
+
+.hint-box {
+    @extend %feedback-box;
+    background: rgba($color-primary, 0.08);
+    border-left: 3px solid $color-primary;
+    margin-bottom: 0.75rem;
+
+    &__label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: $color-primary;
+        margin-bottom: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    &__text {
+        color: $color-text;
+    }
+}
+
+// Spinner & Loading
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    color: $color-text-dim;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}

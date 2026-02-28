@@ -1,0 +1,10 @@
+{
+    "name": "ciphersqlstudio-seed",
+    "version": "1.0.0",
+    "description": "Seeding scripts for CipherSQLStudio",
+    "main": "seedAssignments.js",
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "mongoose": "^8.6.0"
+    }
+}
