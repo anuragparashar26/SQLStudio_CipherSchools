@@ -11,10 +11,10 @@ const app = express();
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://sqlstudiocipherschools-production.up.railway.app/api"
+        "https://sqlstudiocipherschools-production.up.railway.app"
     ]
 }));
-app.use(express.json());    
+app.use(express.json());
 
 // --- Routes ---
 app.get("/api/health", (req, res) => {
