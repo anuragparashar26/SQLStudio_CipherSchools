@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://sqlstudiocipherschools-production.up.railway.app"
+        "https://sqlstudiocipherschools-production.up.railway.app/api"
     ]
 }));
 app.use(express.json());    
