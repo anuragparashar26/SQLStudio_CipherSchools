@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://sql-studio-cipher-schools-pi.vercel.app/"
+        "https://sql-studio-cipher-schools-pi.vercel.app"
     ]
 }));
 app.use(express.json());
