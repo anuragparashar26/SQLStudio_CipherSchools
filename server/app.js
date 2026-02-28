@@ -9,12 +9,12 @@ const app = express();
 
 // --- Middleware ---
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://sql-studio-cipher-schools-pi.vercel.app"
-  ]
+    origin: [
+        "http://localhost:5173",
+        "https://sqlstudiocipherschools-production.up.railway.app"
+    ]
 }));
-app.use(express.json());
+app.use(express.json());    
 
 // --- Routes ---
 app.get("/api/health", (req, res) => {
